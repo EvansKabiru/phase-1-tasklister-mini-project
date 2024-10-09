@@ -1,3 +1,5 @@
+// DOM event for showing task string(s) provided by the user
+
 document.addEventListener("DOMContentLoaded", () => {
 
   let taskForm = document.getElementById('main-content');
@@ -8,9 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let sortSelect = document.getElementById('sort_tasks');
   let durationInput = document.getElementById('task_duration');
   let userInput = document.getElementById('task_user');
+
+  // prevention of page reloading after the submit button is clicked
       
   taskForm.addEventListener('submit', function(event) {
     event.preventDefault();
+
+    //form values
       
     let taskValue = taskInput.value;
     let priorityValue = priorityInput.value;
@@ -31,11 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (priorityValue === 'Low'){
       li.style.color = 'green';
     }
-      
+    
+   // edit button
+
     let editButton = document.createElement('button');
     editButton.textContent = 'Edit Task';
     li.appendChild(editButton);
-      
+
+    // delete task
+
     let deleteButton = document.createElement('button');
     deleteButton.textContent = 'x';
     li.appendChild(deleteButton);
@@ -45,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       taskList.removeChild(li);
     });
       
+    // edit task
           
     editButton.addEventListener('click', function() {
       durationInput.value = durationValue;
@@ -65,7 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
       
   });
 
-      
+   
+  //sorting functionality according to priority value
+
   sortSelect.addEventListener('change', function() {
     let tasks = Array.from(taskList.students);
     tasks.sort(function(a, b, c) {
@@ -85,7 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
       taskList.appendChild(task);
     });
   });
-      
+
+      // code for priority value
+
   function getPriorityValue(color) {
     if (color === 'red') {
       return 'H' ; 
